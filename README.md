@@ -52,7 +52,6 @@ The most recently used element stays at the **front**, and the least recently us
 ## 🖥️ Sample Output
 
 ![Output](output.png)
-
 ---
 
 ## 🎯 Why I built this
