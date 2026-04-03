@@ -43,8 +43,9 @@ public class LRU {
         }
         void display(){
             Node curr = head.next;
+            System.out.print("Data in cache: ");
             while(curr != tail){
-                System.out.print(curr.key + ":" + curr.val + " ");
+                System.out.print("["+curr.key + ":" + curr.val + "] ");
                 curr = curr.next;
             }
             System.out.println();
@@ -63,40 +64,29 @@ public class LRU {
             if(map.size()>capacity){
                 Node lru=tail.prev;
                 remove(lru);
+                System.out.println("Removed LRU key: " + lru.key);
                 map.remove(lru.key);
             }
         }
     }
 
-   public static void main(String []args){
-        Scanner in=new Scanner(System.in);
-        System.out.println("Enter Capacity of Cache:");
-        int cap=in.nextInt();
-        LRUCache cache=new LRUCache(cap);
-        while(true){
-           System.out.println("\n1.Put:\n2.Get:\n3.Exit:");
-           System.out.println("\nEnter Choice: ");
-           int ch=in.nextInt();
-           if(ch==1){
-               System.out.println("Enter Key and Value:");
-               int key=in.nextInt();
-               int val=in.nextInt();
-               cache.put(key,val);
-               System.out.print("Data in cache: ");
-               cache.display();
-           }
-           else if(ch==2){
-               System.out.println("\nEnter Key:");
-               int key=in.nextInt();
-               int result=cache.get(key);
-               if(result==-1)
-                   System.out.println("Key not present");
-               else
-                   System.out.println("Value: "+result);
-           }
-          else
-              break;
-        }
-        in.close();
-   }
+    public static void main(String []args){
+        System.out.println("===== LRU CACHE DEMO =====");
+
+        LRUCache cache = new LRUCache(3);
+
+        System.out.println("\n===== PUT OPERATION =====");
+        cache.put(1,10);
+        cache.put(2,20);
+        cache.put(3,30);
+        cache.display();
+
+        System.out.println("\n===== GET OPERATION =====");
+        System.out.println("Get(1): " + cache.get(1));
+        cache.display();
+
+        System.out.println("\n===== LRU EVICTION =====");
+        cache.put(4,40);
+        cache.display();
+    }
 }
